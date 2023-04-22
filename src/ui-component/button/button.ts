@@ -4,8 +4,6 @@ import { AuthService } from "../../server/authService";
 
 export class Button extends BaseComponent implements IDisposable {
 
-
-
     constructor() {
         super();
         const authService1 = AuthService.getInstance();

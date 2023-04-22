@@ -4,7 +4,9 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { IDisposable } from "../common/lifecycle";
+import { mainStyle } from "../main.style";
 import { AuthService, IAuthService } from "../server/authService";
+import { LayoutService } from "../server/layoutService";
 import { Button } from "../ui-component/button/button";
 import { SideBar } from "./sidebar";
 
@@ -16,15 +18,21 @@ export class MainUi implements IDisposable {
 
 
     constructor(
-        authService: AuthService
+        authService: AuthService,
+        layoutService: LayoutService
     ) {
         this.mainDom = document.createElement('div');
-        authService.setAuthData('data');
-        const button = new Button();
-        this.mainDom.append(button);
+        this.mainDom.classList.add('main');
 
-        this.sideBar = new SideBar();
+        authService.setAuthData('data');
+        authService.onDidGetRemoteAuthData((e)=>{
+            console.log('eeeeeeee',e)
+        })
+        this.sideBar = new SideBar(layoutService);
         
+        const _style = document.createElement('style');
+        _style.appendChild(document.createTextNode(mainStyle));
+        document.head.appendChild(_style)
     }
 
     render() {

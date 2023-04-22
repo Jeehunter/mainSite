@@ -9,6 +9,8 @@
       "allowJs": true,
       "moduleResolution": "node",
       "experimentalDecorators": true,
-      "downlevelIteration":true
-    }
+      "downlevelIteration":true,
+    },
+    "include": ["src","./src/image.d.ts"]
+
   }
