@@ -8,6 +8,7 @@ import { mainStyle } from '../main.style';
 import { AuthService, IAuthService } from '../server/authService';
 import { LanguageService } from '../server/languageService';
 import { LayoutService } from '../server/layoutService';
+import { ViewService } from '../server/viewService';
 import { Button } from '../ui-component/button/button';
 import { SideBar } from './sidebar';
 
@@ -21,7 +22,8 @@ export class MainUi implements IDisposable {
     constructor(
         authService: AuthService,
         layoutService: LayoutService,
-        languageService: LanguageService
+        languageService: LanguageService,
+        viewService: ViewService
     ) {
         this.mainDom = document.createElement('div');
         this.mainDom.classList.add('main');
@@ -30,7 +32,7 @@ export class MainUi implements IDisposable {
         authService.onDidGetRemoteAuthData((e) => {
             console.log('eeeeeeee', e);
         });
-        this.sideBar = new SideBar(layoutService,languageService);
+        this.sideBar = new SideBar(layoutService, languageService, viewService);
 
         const _style = document.createElement('style');
         _style.appendChild(document.createTextNode(mainStyle));

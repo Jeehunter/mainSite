@@ -8,7 +8,7 @@ export class Button extends BaseComponent implements IDisposable {
         super();
         const authService1 = AuthService.getInstance();
         console.log(authService1.getLocalAuthData());
-        
+
     }
 
     dispose(): void {
@@ -17,4 +17,4 @@ export class Button extends BaseComponent implements IDisposable {
 
 }
 
-defineCustomElement('ui-button',Button);
+defineCustomElement('ui-button', Button);
