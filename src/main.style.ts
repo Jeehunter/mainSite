@@ -9,4 +9,4 @@ export const mainStyle = `
     .main {
         height: 100%;
     }
-`
+`;

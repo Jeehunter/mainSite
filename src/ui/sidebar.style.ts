@@ -1,6 +1,7 @@
 
+
 export const sideBarStyle = `
-    .main .side-bar {
+    .main > .side-bar {
         height: 100%;
         backdrop-filter: saturate(180%) blur(1em);
         background: linear-gradient(
@@ -14,6 +15,12 @@ export const sideBarStyle = `
           rgba(7, 179, 155, 0.101961) 86%,
           rgba(109, 186, 130, 0.101961) 100%
         );
-      }
     }
-`
+
+    .main .side-bar .owner-name {
+      font-size: 21px;
+      font-weight: bold;
+      text-align: center;
+    }
+    
+`;
