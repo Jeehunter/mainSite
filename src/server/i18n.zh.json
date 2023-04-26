@@ -1,4 +1,8 @@
 {
     "baseInfo.ownerName": "冷屋养猫先生",
-    "baseInfo.email": "邮箱"
+    "baseInfo.email": "邮箱",
+    "view.id.index": "主页",
+    "view.id.article": "文章",
+    "view.id.project": "工程",
+    "view.id.about": "关于"
 }
