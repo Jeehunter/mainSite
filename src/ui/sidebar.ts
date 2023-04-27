@@ -5,7 +5,7 @@ import avatar from '../asset/avatar.png';
 import { Image } from '../ui-component/lazyload/image';
 import { LanguageService } from '../server/languageService';
 import { ViewSelector } from '../ui-component/viewSelector/viewSelector';
-import { ViewService } from '../server/viewService';
+import { IViewPath, ViewService } from '../server/viewService';
 
 export enum layoutWidth {
     Min = 40,
@@ -14,6 +14,8 @@ export enum layoutWidth {
 
 export const MIN_DEVICE_WIDTH = 720;
 
+export type IViewIdPath = Omit<IViewPath, 'displayName'>
+
 export class SideBar implements IDisposable {
     private element: HTMLElement;
     private avatar: Image;
@@ -21,6 +23,13 @@ export class SideBar implements IDisposable {
     private selector: ViewSelector;
 
     private _size: ISize;
+
+    private _viewPaths: IViewIdPath[] = [
+        { id: 'view.id.index', path: '' },
+        { id: 'view.id.article', path: '' },
+        { id: 'view.id.project', path: '' },
+        { id: 'view.id.about', path: '' }
+    ];
 
 
     _languageService: LanguageService;
@@ -43,7 +52,13 @@ export class SideBar implements IDisposable {
 
         this.renderOwnername();
 
-        this.selector = new ViewSelector([], { width: this._size.width });
+        const viewPaths = [];
+
+        for (const viewIdPath of this._viewPaths) {
+            const item = { ...viewIdPath, displayName: this._languageService.localize(viewIdPath.id, viewIdPath.id) };
+            viewPaths.push(item);
+        }
+        this.selector = new ViewSelector(viewPaths, { width: this._size.width });
 
         layoutService.onDidChangeWindowSize((size) => {
             const width = size.width <= MIN_DEVICE_WIDTH ? layoutWidth.Min : layoutWidth.Middle;
@@ -54,7 +69,7 @@ export class SideBar implements IDisposable {
 
     render(parent: HTMLElement) {
         parent.appendChild(this.element);
-
+        this.element.appendChild(this.selector);
     }
 
     renderOwnername() {
