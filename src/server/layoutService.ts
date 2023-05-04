@@ -15,7 +15,7 @@ export class LayoutService {
 
     private constructor() {
         window.onresize = () => {
-            this._onDidChangeWindowSize.emit('onDidChangeWindowSize', { width: document.body.clientWidth, height: document.body.clientHeight })
+            this._onDidChangeWindowSize.emit('onDidChangeWindowSize', { width: document.body.clientWidth, height: document.body.clientHeight });
         };
     }
 
