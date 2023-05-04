@@ -10,7 +10,7 @@ export interface IRemoteData {
 }
 
 
-export class AuthService {
+export class AuthService implements IAuthService{
 
     private token?: string;
     private static authService: AuthService = new AuthService();

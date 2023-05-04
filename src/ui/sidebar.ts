@@ -7,6 +7,13 @@ import { LanguageService } from '../server/languageService';
 import { ViewSelector } from '../ui-component/viewSelector/viewSelector';
 import { IViewPath, ViewService } from '../server/viewService';
 
+import githubIcon from '../asset/logo/github.png';
+import emailIcon from '../asset/logo/email.png';
+import bilibiliIcon from '../asset/logo/bilibili.png';
+import wechatIcon from '../asset/logo/wechat.png';
+import wechatQR from '../asset/images/wechatQR.png';
+import { HoverType, IconLabel, IconLabelOptions } from '../ui-component/iconLabel/iconLabel';
+
 export enum layoutWidth {
     Min = 40,
     Middle = 240
@@ -21,16 +28,46 @@ export class SideBar implements IDisposable {
     private avatar: Image;
     private ownerName: HTMLElement;
     private selector: ViewSelector;
+    private copyRight: HTMLElement;
 
     private _size: ISize;
 
     private _viewPaths: IViewIdPath[] = [
-        { id: 'view.id.index', path: '' },
-        { id: 'view.id.article', path: '' },
-        { id: 'view.id.project', path: '' },
-        { id: 'view.id.about', path: '' }
+        { id: 'view.id.index', path: '#/' },
+        { id: 'view.id.article', path: '#/article' },
+        { id: 'view.id.project', path: '#/project' },
+        { id: 'view.id.about', path: '#/about' }
     ];
 
+    private _copyrightEndYear = '2023';
+
+    private _ownerInfo: IconLabelOptions[] = [
+        {
+            iconPath: githubIcon,
+            label: 'github.com/Jeehunter',
+            link: 'https://github.com/Jeehunter',
+            size: '13px',
+            iconSize: '22px'
+        },
+        {
+            iconPath: bilibiliIcon,
+            label: 'space.bilibili.com/2822311',
+            link: 'https://space.bilibili.com/2822311',
+            size: '13px',
+            iconSize: '22px'
+        },
+        {
+            iconPath: wechatIcon,
+            label: 'JeeHunterN[QR-code]',
+            hover: wechatQR,
+            hoverType: HoverType.Picture,
+            size: '13px',
+            iconSize: '22px'
+        }
+    ];
+
+
+    private _ownerInfoItems: IconLabel[] = [];
 
     _languageService: LanguageService;
 
@@ -59,17 +96,45 @@ export class SideBar implements IDisposable {
             viewPaths.push(item);
         }
         this.selector = new ViewSelector(viewPaths, { width: this._size.width });
+        this.element.appendChild(this.selector);
+
+        this.selector.onDidSelectView((path) => {
+            viewService.setSidebarSelectView(path);
+        });
+
+        for (const ownInfo of this._ownerInfo) {
+            const ownerInfoContainer = document.createElement('div');
+            ownerInfoContainer.classList.add('owner-info-container');
+            const item = new IconLabel(ownInfo);
+            this._ownerInfoItems.push(item);
+            item.style.marginBottom = '40px';
+            ownerInfoContainer.append(item);
+            this.element.appendChild(ownerInfoContainer);
+        }
 
         layoutService.onDidChangeWindowSize((size) => {
-            const width = size.width <= MIN_DEVICE_WIDTH ? layoutWidth.Min : layoutWidth.Middle;
-            this.element.style.width = width + 'px';
-            this.avatar.resize({ width, height: width });
+            this._resize(size);
         });
+
+        this.renderCopyRight();
+
+        this._resize({width: layoutService.getWindowSize().width});
     }
 
     render(parent: HTMLElement) {
         parent.appendChild(this.element);
-        this.element.appendChild(this.selector);
+    }
+
+    private _resize(size: ISize) {
+        const width = size.width <= MIN_DEVICE_WIDTH ? layoutWidth.Min : layoutWidth.Middle;
+        this.element.style.width = width + 'px';
+        this.avatar.resize({ width, height: width });
+
+        this._ownerInfoItems.forEach(item => {
+            item.setLabelShow(width === layoutWidth.Middle ? true : false);
+        });
+
+        this.copyRight.style.display = (width === layoutWidth.Middle ? 'block' : 'none');
     }
 
     renderOwnername() {
@@ -79,6 +144,16 @@ export class SideBar implements IDisposable {
         this.element.appendChild(this.ownerName);
     }
 
+    renderCopyRight() {
+        this.copyRight = document.createElement('div');
+        this.copyRight.classList.add('copyright-container');
+        const content = document.createElement('p');
+        content.classList.add('copyright-container-content');
+        content.innerHTML = `Copyright © 2019-${this._copyrightEndYear} All Rights Reserved.
+        <br/><a class='copyright-container-content-linkable' target="blank" href="https://beian.miit.gov.cn/">黑ICP备18004551号-2 </a>`;
+        this.copyRight.appendChild(content);
+        this.element.appendChild(this.copyRight);
+    }
 
     get width() {
         return this.element.style.width;

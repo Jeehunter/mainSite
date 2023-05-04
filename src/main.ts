@@ -14,5 +14,9 @@ import { ViewService } from './server/viewService';
 
     const mainUi = new MainUi(authService,layoutService,languageService,viewService);
     mainUi.render();
+
+    window.addEventListener('hashchange',function(e){
+        console.log(e,'eeeeeeeeeeeeeeeeeeeeeeeeeeeeee')
+    })
 })();
 
