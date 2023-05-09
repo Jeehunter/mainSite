@@ -8,7 +8,6 @@ import { ViewSelector } from '../ui-component/viewSelector/viewSelector';
 import { IViewPath, ViewService } from '../server/viewService';
 
 import githubIcon from '../asset/logo/github.png';
-import emailIcon from '../asset/logo/email.png';
 import bilibiliIcon from '../asset/logo/bilibili.png';
 import wechatIcon from '../asset/logo/wechat.png';
 import wechatQR from '../asset/images/wechatQR.png';

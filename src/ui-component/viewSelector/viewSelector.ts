@@ -38,8 +38,7 @@ export class ViewSelector extends BaseComponent implements IDisposable {
             const viewItem = this.viewItems[i];
             viewItem.onclick = ()=>{
                 this.selectView(viewItem.id);
-                console.log('id')
-            }
+            };
         }
     }
 
