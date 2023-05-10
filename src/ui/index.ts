@@ -9,7 +9,7 @@ import { AuthService, IAuthService } from '../server/authService';
 import { LanguageService } from '../server/languageService';
 import { LayoutService } from '../server/layoutService';
 import { ViewService } from '../server/viewService';
-import { Button } from '../ui-component/button/button';
+import { MainView } from './mainView';
 import { SideBar } from './sidebar';
 
 export class MainUi implements IDisposable {
@@ -17,7 +17,7 @@ export class MainUi implements IDisposable {
     private mainDom: HTMLElement;
 
     private sideBar: SideBar;
-
+    private mainView: MainView;
 
     constructor(
         authService: AuthService,
@@ -33,6 +33,7 @@ export class MainUi implements IDisposable {
             console.log('eeeeeeee', e);
         });
         this.sideBar = new SideBar(layoutService, languageService, viewService);
+        this.mainView = new MainView(layoutService,languageService,viewService);
 
         const _style = document.createElement('style');
         _style.appendChild(document.createTextNode(mainStyle));
@@ -41,6 +42,7 @@ export class MainUi implements IDisposable {
 
     render() {
         this.sideBar.render(this.mainDom);
+        this.mainView.render(this.mainDom);
         document.body.appendChild(this.mainDom);
     }
 

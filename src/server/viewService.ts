@@ -9,9 +9,7 @@ export interface IViewPath {
 export class ViewService {
     private static viewService: ViewService = new ViewService();
     private _onDidChangeSidebarSelectView = new EventEmitter<IViewPath>();
-    public onDidChangeSidebarSelectView = this._onDidChangeSidebarSelectView.asSubscriber('onDidChangeWindowSize');
-
-    
+    public onDidChangeSidebarSelectView = this._onDidChangeSidebarSelectView.asSubscriber('onDidChangeSidebarSelectView');
 
     private constructor() {
         

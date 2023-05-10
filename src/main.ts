@@ -11,12 +11,9 @@ import { ViewService } from './server/viewService';
     const languageService = LanguageService.getInstance();
     const viewService = ViewService.getInstance();
 
-
+    document.title = languageService.localize('baseInfo.ownerName','coldRoom');
     const mainUi = new MainUi(authService,layoutService,languageService,viewService);
     mainUi.render();
 
-    window.addEventListener('hashchange',function(e){
-        console.log(e,'eeeeeeeeeeeeeeeeeeeeeeeeeeeeee')
-    })
 })();
 
