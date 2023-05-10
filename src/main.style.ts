@@ -7,6 +7,8 @@ export const mainStyle = `
     }
 
     .main {
+        display: flex;
+        flex-wrap: nowrap;
         height: 100%;
     }
 `;

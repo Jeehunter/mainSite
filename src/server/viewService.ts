@@ -11,12 +11,19 @@ export class ViewService {
     private _onDidChangeSidebarSelectView = new EventEmitter<IViewPath>();
     public onDidChangeSidebarSelectView = this._onDidChangeSidebarSelectView.asSubscriber('onDidChangeSidebarSelectView');
 
+    private _currentSelectViewPath?: IViewPath;
+
     private constructor() {
         
     }
 
     public setSidebarSelectView(path: IViewPath) {
+        this._currentSelectViewPath = path;
         this._onDidChangeSidebarSelectView.emit('onDidChangeSidebarSelectView', path);
+    }
+
+    get currentPath(){
+        return this._currentSelectViewPath;
     }
 
     public static getInstance() {
