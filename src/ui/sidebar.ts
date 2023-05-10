@@ -18,6 +18,13 @@ export enum layoutWidth {
     Middle = 240
 }
 
+export const VIEW_PATHS: IViewIdPath[] = [
+    { id: 'view.id.index', path: '#/' },
+    { id: 'view.id.article', path: '#/article' },
+    { id: 'view.id.project', path: '#/project' },
+    { id: 'view.id.about', path: '#/about' }
+];
+
 export const MIN_DEVICE_WIDTH = 720;
 
 export type IViewIdPath = Omit<IViewPath, 'displayName'>
@@ -30,13 +37,6 @@ export class SideBar implements IDisposable {
     private copyRight: HTMLElement;
 
     private _size: ISize;
-
-    private _viewPaths: IViewIdPath[] = [
-        { id: 'view.id.index', path: '#/' },
-        { id: 'view.id.article', path: '#/article' },
-        { id: 'view.id.project', path: '#/project' },
-        { id: 'view.id.about', path: '#/about' }
-    ];
 
     private _copyrightEndYear = '2023';
 
@@ -90,7 +90,7 @@ export class SideBar implements IDisposable {
 
         const viewPaths = [];
 
-        for (const viewIdPath of this._viewPaths) {
+        for (const viewIdPath of VIEW_PATHS) {
             const item = { ...viewIdPath, displayName: this._languageService.localize(viewIdPath.id, viewIdPath.id) };
             viewPaths.push(item);
         }
