@@ -15,6 +15,7 @@ export class MainView implements IDisposable {
     private _viewPath?: IViewPath;
 
     private _mainView?: IndexPage | ArticlePage | ProjectPage | AboutPage;
+    private _layoutService: LayoutService;
 
     constructor(layoutService: LayoutService, languageService: LanguageService, viewService: ViewService) {
         const _style = document.createElement('style');
@@ -24,6 +25,7 @@ export class MainView implements IDisposable {
         this.element.classList.add('main-view');
 
         this._viewPath = viewService.currentPath;
+        this._layoutService = layoutService;
 
         this.renderContent();
         viewService.onDidChangeSidebarSelectView((e) => {
@@ -35,20 +37,20 @@ export class MainView implements IDisposable {
 
     renderContent() {
         this.element.innerHTML = '';
-        if(this._mainView){
+        if (this._mainView) {
             this._mainView.dispose();
         }
 
         if (this._viewPath === undefined || this._viewPath.id === VIEW_PATHS[0].id) {
-            this._mainView = new IndexPage();
+            this._mainView = new IndexPage(this._layoutService);
         } else if (this._viewPath.id === VIEW_PATHS[1].id) {
-            this._mainView = new ArticlePage();
+            this._mainView = new ArticlePage(this._layoutService);
         } else if (this._viewPath.id === VIEW_PATHS[2].id) {
-            this._mainView = new ProjectPage();
+            this._mainView = new ProjectPage(this._layoutService);
         } else if (this._viewPath.id === VIEW_PATHS[3].id) {
-            this._mainView = new AboutPage();
+            this._mainView = new AboutPage(this._layoutService);
         } else {
-            this._mainView = new IndexPage();
+            this._mainView = new IndexPage(this._layoutService);
         }
 
         this._mainView.render(this.element);

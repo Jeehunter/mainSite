@@ -1,5 +1,5 @@
 import { IDisposable } from '../common/lifecycle';
-import { ISize, LayoutService } from '../server/layoutService';
+import { ISize, LayoutService, MIN_DEVICE_WIDTH } from '../server/layoutService';
 import { sideBarStyle } from './sidebar.style';
 import avatar from '../asset/avatar.png';
 import { Image } from '../ui-component/lazyload/image';
@@ -25,7 +25,7 @@ export const VIEW_PATHS: IViewIdPath[] = [
     { id: 'view.id.about', path: '#/about' }
 ];
 
-export const MIN_DEVICE_WIDTH = 720;
+
 
 export type IViewIdPath = Omit<IViewPath, 'displayName'>
 

@@ -6,7 +6,7 @@ export interface ISize {
     height?: number;
 }
 
-
+export const MIN_DEVICE_WIDTH = 720;
 
 export class LayoutService {
     private static layoutService: LayoutService = new LayoutService();
