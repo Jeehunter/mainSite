@@ -17,6 +17,10 @@ enum layoutHeight {
     Middle = '380px'
 }
 
+interface accessItemHandler {
+    handler: () => unknown;
+}
+
 export class IndexPage extends AbstractPage implements IDisposable {
 
     private _welcomeWrapper: HTMLElement;
@@ -46,6 +50,32 @@ export class IndexPage extends AbstractPage implements IDisposable {
         this._layoutService.onDidChangeWindowSize((size) => {
             this._resize(size);
         });
+
+        const welcomeTitle = document.createElement('h2');
+        welcomeTitle.classList.add('welcome-title');
+        welcomeTitle.innerText = this._languageService.localize('index.welcome.title', 'Welcome');
+        this._welcomeWrapper.appendChild(welcomeTitle);
+
+
+    }
+
+    createAccessItem(title: string, desc: string, handler: accessItemHandler) {
+        const item = document.createElement('div');
+        item.classList.add('access-item');
+
+        const titleDom = document.createElement('h4');
+        titleDom.innerText = title;
+        item.appendChild(titleDom);
+
+        const descDom = document.createElement('p');
+        descDom.innerText = desc;
+        item.appendChild(descDom);
+
+        item.addEventListener('click', () => {
+            handler.handler();
+        });
+
+        return item;
     }
 
     private _resize(size: ISize) {

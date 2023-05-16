@@ -16,6 +16,7 @@ export class MainView implements IDisposable {
 
     private _mainView?: IndexPage | ArticlePage | ProjectPage | AboutPage;
     private _layoutService: LayoutService;
+    private _languageService: LanguageService;
 
     constructor(layoutService: LayoutService, languageService: LanguageService, viewService: ViewService) {
         const _style = document.createElement('style');
@@ -26,6 +27,7 @@ export class MainView implements IDisposable {
 
         this._viewPath = viewService.currentPath;
         this._layoutService = layoutService;
+        this._languageService = languageService;
 
         this.renderContent();
         viewService.onDidChangeSidebarSelectView((e) => {
@@ -42,7 +44,7 @@ export class MainView implements IDisposable {
         }
 
         if (this._viewPath === undefined || this._viewPath.id === VIEW_PATHS[0].id) {
-            this._mainView = new IndexPage(this._layoutService);
+            this._mainView = new IndexPage(this._layoutService, this._languageService);
         } else if (this._viewPath.id === VIEW_PATHS[1].id) {
             this._mainView = new ArticlePage(this._layoutService);
         } else if (this._viewPath.id === VIEW_PATHS[2].id) {
