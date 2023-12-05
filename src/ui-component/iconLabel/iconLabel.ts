@@ -64,6 +64,7 @@ export class IconLabel extends BaseComponent implements IDisposable {
 
         if (options.link) {
             const linkable = document.createElement('a');
+            linkable.target = "_blank";
             linkable.classList.add('linkable');
             linkable.href = options.link;
             linkable.appendChild(this.element);

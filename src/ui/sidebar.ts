@@ -12,6 +12,7 @@ import bilibiliIcon from '../asset/logo/bilibili.png';
 import wechatIcon from '../asset/logo/wechat.png';
 import wechatQR from '../asset/images/wechatQR.png';
 import { HoverType, IconLabel, IconLabelOptions } from '../ui-component/iconLabel/iconLabel';
+import { ProductService } from '../server/productService';
 
 export enum layoutWidth {
     Min = 40,
@@ -35,6 +36,7 @@ export class SideBar implements IDisposable {
     private ownerName: HTMLElement;
     private selector: ViewSelector;
     private copyRight: HTMLElement;
+    private productService: ProductService = ProductService.getInstance();
 
     private _size: ISize;
 
@@ -43,15 +45,15 @@ export class SideBar implements IDisposable {
     private _ownerInfo: IconLabelOptions[] = [
         {
             iconPath: githubIcon,
-            label: 'github.com/Jeehunter',
-            link: 'https://github.com/Jeehunter',
+            label: this.productService.getProductBy('ownerInfo.github.label'),
+            link: this.productService.getProductBy('ownerInfo.github.link'),
             size: '13px',
             iconSize: '22px'
         },
         {
             iconPath: bilibiliIcon,
-            label: 'space.bilibili.com/2822311',
-            link: 'https://space.bilibili.com/2822311',
+            label: this.productService.getProductBy('ownerInfo.bilibili.label'),
+            link: this.productService.getProductBy('ownerInfo.bilibili.link'),
             size: '13px',
             iconSize: '22px'
         },
@@ -117,7 +119,7 @@ export class SideBar implements IDisposable {
 
         this.renderCopyRight();
 
-        this._resize({width: layoutService.getWindowSize().width});
+        this._resize({ width: layoutService.getWindowSize().width });
     }
 
     render(parent: HTMLElement) {

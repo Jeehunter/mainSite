@@ -56,7 +56,23 @@ export class IndexPage extends AbstractPage implements IDisposable {
         welcomeTitle.innerText = this._languageService.localize('index.welcome.title', 'Welcome');
         this._welcomeWrapper.appendChild(welcomeTitle);
 
+        
+        this._welcomeWrapper.appendChild(this.createLoginCard());
+    }
 
+
+    createLoginCard(){
+        const card = document.createElement('div');
+
+        const userName = document.createElement('input');
+
+        const userPassword = document.createElement('input');
+        
+
+        card.append(userName,userPassword);
+        
+
+        return card;
     }
 
     createAccessItem(title: string, desc: string, handler: accessItemHandler) {

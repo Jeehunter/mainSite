@@ -1,4 +1,4 @@
-import * as _ from 'lodash';
+
 import { EventEmitter } from '../common/event';
 import * as zh_JSON from './i18n.zh.json';
 
@@ -6,8 +6,6 @@ export enum Language {
     CN = 'zh',
     EN = 'en'
 }
-
-
 
 export class LanguageService {
     private static languageService: LanguageService = new LanguageService();

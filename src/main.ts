@@ -11,7 +11,7 @@ import { ViewService } from './server/viewService';
     const languageService = LanguageService.getInstance();
     const viewService = ViewService.getInstance();
 
-    document.title = languageService.localize('baseInfo.ownerName','coldRoom');
+    document.title = languageService.localize('baseInfo.title','coldRoom');
     const mainUi = new MainUi(authService,layoutService,languageService,viewService);
     mainUi.render();
 
