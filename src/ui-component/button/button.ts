@@ -1,14 +1,21 @@
 import { BaseComponent, defineCustomElement } from '../../common/common';
 import { IDisposable } from '../../common/lifecycle';
-import { AuthService } from '../../server/authService';
 
-export class Button extends BaseComponent implements IDisposable {
+export interface UIButtonOptions {
+    label: string;
+}
 
-    constructor() {
+
+export class UIButton extends BaseComponent implements IDisposable {
+    element: HTMLElement;
+
+
+    constructor(buttonOptions: UIButtonOptions) {
         super();
-        const authService1 = AuthService.getInstance();
-        console.log(authService1.getLocalAuthData());
+        this.element = document.createElement('button');
 
+        this.element.innerText = buttonOptions.label;
+        this.shadow.append(this.element);
     }
 
     dispose(): void {
@@ -17,4 +24,4 @@ export class Button extends BaseComponent implements IDisposable {
 
 }
 
-defineCustomElement('ui-button', Button);
+defineCustomElement('ui-button', UIButton);

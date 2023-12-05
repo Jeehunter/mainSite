@@ -5,6 +5,7 @@ import { indexStyle } from './index.style';
 import { ISize, LayoutService, MIN_DEVICE_WIDTH } from '../server/layoutService';
 import { LanguageService } from '../server/languageService';
 import { ViewService } from '../server/viewService';
+import { UIButton } from '../ui-component/button/button';
 
 
 enum layoutWidth {
@@ -69,7 +70,12 @@ export class IndexPage extends AbstractPage implements IDisposable {
         const userPassword = document.createElement('input');
         
 
-        card.append(userName,userPassword);
+        const loginBtn = new UIButton({
+            label:'login'
+        })
+
+
+        card.append(userName,userPassword,loginBtn);
         
 
         return card;
