@@ -72,7 +72,7 @@ export class IndexPage extends AbstractPage implements IDisposable {
 
         const loginBtn = new UIButton({
             label:'login'
-        })
+        });
 
 
         card.append(userName,userPassword,loginBtn);
