@@ -1,5 +1,6 @@
+import { sidebarBackground } from "../common/color.style";
 
-export const mainStyle = `
+export const indexStyle = `
     html,body {
         margin: 0;
         padding: 0;
@@ -10,5 +11,9 @@ export const mainStyle = `
         display: flex;
         flex-wrap: nowrap;
         height: 100%;
+    }
+
+    .main {
+        --sidebar-background: ${sidebarBackground};
     }
 `;

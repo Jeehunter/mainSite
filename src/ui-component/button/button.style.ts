@@ -7,6 +7,7 @@ export const uiButtonStyle = `
         border: 1px solid ${baseBlue};
         background-color: ${baseBlue};
         cursor: pointer;
+        user-select:none;
     }
 
     .small {

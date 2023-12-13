@@ -35,9 +35,6 @@ export class UIButton extends BaseComponent implements IDisposable {
         }
         this.renderSize(this.options.size);
 
-
-
-
         this.element.innerText = buttonOptions.label;
         this.shadow.append(this.element);
     }

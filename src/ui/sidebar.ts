@@ -40,7 +40,8 @@ export class SideBar implements IDisposable {
 
     private _size: ISize;
 
-    private _copyrightEndYear = '2023';
+    private _copyrightEndYear = '2024';
+    private _copyRightCode = '黑ICP备18004551号-2'
 
     private _ownerInfo: IconLabelOptions[] = [
         {
@@ -151,7 +152,7 @@ export class SideBar implements IDisposable {
         const content = document.createElement('p');
         content.classList.add('copyright-container-content');
         content.innerHTML = `Copyright © 2019-${this._copyrightEndYear} All Rights Reserved.
-        <br/><a class='copyright-container-content-linkable' target="blank" href="https://beian.miit.gov.cn/">黑ICP备18004551号-2 </a>`;
+        <br/><a class='copyright-container-content-linkable' target="blank" href="https://beian.miit.gov.cn/">${this._copyRightCode}</a>`;
         this.copyRight.appendChild(content);
         this.element.appendChild(this.copyRight);
     }
